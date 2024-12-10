@@ -1,10 +1,14 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import useBasket from "../store/useBasket";
 
 const Header = () => {
+  const { items } = useBasket();
+  const calcTotalItemCount = () => {
+    return items.reduce((acc, curr) => acc + curr.quantity, 0);
+  };
   return (
-    <header className="py-4 bg-stone-400 flex justify-center">
-      <nav className="flex gap-4">
+    <header className="p-4 bg-sky-100 ">
+      <nav className="flex justify-between gap-4">
         <NavLink
           className={({ isActive, isPending }) =>
             isPending
@@ -13,9 +17,9 @@ const Header = () => {
               ? "text-blue-600 font-bold"
               : ""
           }
-          to="/route-1"
+          to="/"
         >
-          Route 1
+          Home
         </NavLink>
         <NavLink
           className={({ isActive, isPending }) =>
@@ -25,21 +29,9 @@ const Header = () => {
               ? "text-blue-600 font-bold"
               : ""
           }
-          to="/route-2"
+          to="/basket"
         >
-          Route 2
-        </NavLink>
-        <NavLink
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "text-gray-800"
-              : isActive
-              ? "text-blue-600 font-bold"
-              : ""
-          }
-          to="/route-3"
-        >
-          Route 3
+          Basket {calcTotalItemCount()}
         </NavLink>
       </nav>
     </header>
