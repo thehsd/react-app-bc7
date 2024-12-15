@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
-import useBasket from "../store/useBasket";
+// import useBasket from "../store/useBasket";
+import { useSelector } from "react-redux";
+import { basketStates } from "../redux/slices/basketSlice";
 
 const Header = () => {
-  const { items } = useBasket();
+  const { items } = useSelector(basketStates);
+  // const { items } = useBasket();
   const calcTotalItemCount = () => {
     return items.reduce((acc, curr) => acc + curr.quantity, 0);
   };

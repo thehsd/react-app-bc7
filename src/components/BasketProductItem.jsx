@@ -1,11 +1,13 @@
 import React from "react";
-import useBasket from "../store/useBasket";
+// import useBasket from "../store/useBasket";
+import { removeBasket } from "../redux/slices/basketSlice";
+import { useDispatch } from "react-redux";
 // zustand
 // custom Hooks
 const ProductItem = ({ productData }) => {
   const { imageSrc, name, price, quantity } = productData;
-
-  const { actions } = useBasket();
+  const dispatch = useDispatch();
+  // const { actions } = useBasket();
 
   return (
     <div className="bg-zinc-200 p-2 m-2 rounded-md">
@@ -21,7 +23,8 @@ const ProductItem = ({ productData }) => {
       </div>
       <button
         className="bg-red-600 p-2 rounded text-white "
-        onClick={() => actions.removeFromBasket(productData)}
+        // onClick={() => actions.removeFromBasket(productData)}
+        onClick={() => dispatch(removeBasket(productData))}
       >
         Remove item
       </button>
